@@ -6,8 +6,8 @@ Feature: Create student
     Given authorization token is provided for "team member"
     And user accepts content type as "application/json"
     When user sends POST request to "/api/students/student" with following information:
-      | first-name | last-name | email             | password | role                | campus-location | batch-number | team-name      |
-      | Lesly      | McDonald  | lesslee@email.com | 1111     | student-team-member | VA              | 15           | Online_Hackers |
+      | first-name | last-name | email               | password | role                | campus-location | batch-number | team-name      |
+      | Lesly      | McDonald  | lesslyy20@email.com | 1111     | student-team-member | VA              | 15           | Online_Hackers |
     And user verifies that response status code is 403
 
 
@@ -17,7 +17,7 @@ Feature: Create student
     And user accepts content type as "application/json"
     When user sends POST request to "/api/students/student" with following information:
       | first-name | last-name | email               | password | role                | campus-location | batch-number | team-name      |
-      | Lesly      | SDET      | lesly2020blabla@email.com | 1111     | student-team-member | VA              | 15           | Online_Hackers |
+      | Lesly      | SDET      | lesslyy@email.com   | 1111     | student-team-member | VA              | 15           | Online_Hackers |
     And user verifies that response status code is 201
 
 
@@ -27,14 +27,14 @@ Feature: Create student
     And user accepts content type as "application/json"
     When user sends POST request to "/api/students/student" with following information:
       | first-name | last-name | email               | password | role                | campus-location | batch-number | team-name      |
-      | Lesly      | SDET      | lesly2020blabla@email.com | 1111     | student-team-member | VA              | 15           | Online_Hackers |
+      | Lesly      | SDET      | lesslyy@email.com   | 1111     | student-team-member | VA              | 15           | Online_Hackers |
     And user verifies that response status code is 201
     Then user is on the landing page
-    When user logs in with "lesly2020@email.com" email and "1111" password
+    When user logs in with "lesslyy@email.com" email and "1111" password
     And user navigates to personal page
     Then user verifies that information displays correctly:
       | first-name | last-name | email               | password | role                | campus-location | batch-number | team-name      |
-      | Lesly      | SDET      | lesly2020blabla@email.com | 1111     | student-team-member | VA              | 15           | Online_Hackers |
+      | Lesly      | SDET      | lesslyy@email.com   | 1111     | student-team-member | VA              | 15           | Online_Hackers |
 
 #    we can add only one student
 #  so to resolve this issue, we can delete added student at the end of the test

@@ -10,12 +10,16 @@ import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Driver {
 
     //same for everyone
     private static final ThreadLocal<WebDriver> driverPool = new ThreadLocal<>();
+    public static final String USERNAME = "tanyushkadiaz1";
+    public static final String AUTOMATE_KEY = "PS7rkMvcBcNedEKmxxJX";
+    public static final String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
 
     //so no one can create object of Driver class
     //everyone should call static getter method instead
@@ -31,7 +35,7 @@ public class Driver {
      * @return
      */
     public synchronized static WebDriver getDriver() {
-        String GRID_URL = "http://35.171.158.59:4444/wd/hub";
+        String GRID_URL = "http://100.25.192.99:4444/wd/hub";
         //if webdriver object doesn't exist
         //create it
         if (driverPool.get() == null) {
@@ -98,6 +102,22 @@ public class Driver {
                 case "firefox":
                     WebDriverManager.firefoxdriver().setup();
                     driverPool.set(new FirefoxDriver());
+                    break;
+                case "browser-stack-chrome":
+                    DesiredCapabilities caps = new DesiredCapabilities();
+
+                    caps.setCapability("os", "Windows");
+                    caps.setCapability("os_version", "10");
+                    caps.setCapability("browser", "Chrome");
+                    caps.setCapability("browser_version", "80");
+
+                    caps.setCapability("name", "BookIT Automation");
+
+                    try {
+                        driverPool.set(new RemoteWebDriver(new URL(URL), caps));
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 default:
                     throw new RuntimeException("Wrong browser name!");
